@@ -1,0 +1,352 @@
+@import "tailwindcss";
+
+@theme {
+  /* Your existing fonts */
+  --font-teko: "Teko", sans-serif;
+  --font-goldman: "Goldman", sans-serif;
+}
+
+@layer components {
+  /* --- EXISTING CLASSES --- */
+  .corner {
+    @apply absolute h-5 pointer-events-none;
+  }
+  .menuTextContainer {
+    @apply flex gap-4 transition-colors font-goldman font-normal text-gray-400 text-xl uppercase group-hover:text-white group-hover:font-bold;
+  }
+  .menuArrow {
+    @apply text-green-500 text-2xl hidden group-hover:inline transition-opacity;
+  }
+  .menuHoverBox {
+    @apply group-hover:border-[#109A00] group-hover:border group-hover:bg-[#0A2E06]  p-3 pl-10;
+  }
+  .menu-container {
+    @apply flex flex-col w-lg xl:col-start-1 xl:row-start-3 xl:self-start pb-12 xl:pb-0 shrink-0 z-10 pt-5;
+  }
+  .cctvFrame {
+    @apply border border-[#109A00] p-1;
+  }
+  .liveTime {
+    @apply absolute bottom-4 left-30 -translate-x-1/2 bg-black text-white font-goldman text-3xl tracking-widest drop-shadow-md;
+  }
+
+  /* --- NEW APP LAYOUT CLASSES --- */
+  .app-wrapper {
+    @apply relative w-full min-h-screen flex flex-col xl:grid xl:grid-cols-[1fr_2fr] xl:grid-rows-[auto_auto_1fr] gap-3 xl:gap-x-5 p-6 xl:p-12 xl:overflow-hidden;
+  }
+
+  /* Wallpaper Corners */
+  .wallpaper-corner {
+    @apply fixed m-4 xl:m-8 h-8 pointer-events-none opacity-80 z-0;
+  }
+  .corner-tl { @apply left-0 top-0; }
+  .corner-bl { @apply left-0 bottom-0 -rotate-90; }
+  .corner-tr { @apply right-0 top-0 rotate-90; }
+  .corner-br { @apply right-0 bottom-0 -rotate-180; }
+
+  /* Logo */
+  .logo-container {
+    @apply flex items-center h-16 xl:h-20 xl:col-start-1 xl:row-start-1 shrink-0 z-10;
+  }
+  .logo-image {
+    @apply h-full w-auto object-contain;
+  }
+
+  /* Radar */
+  .radar-container {
+    @apply hidden xl:flex justify-end h-32 xl:col-start-2 xl:row-start-1 shrink-0 z-10;
+  }
+  .radar-video {
+    @apply h-full mix-blend-screen opacity-80 rounded-full;
+  }
+
+  /* --- HOME PAGE CLASSES --- */
+  /* CTA Block */
+  .cta-container {
+    @apply flex flex-col w-full max-w-lg xl:col-start-1 xl:row-start-2 xl:self-start z-10;
+  }
+  .cta-heading {
+    @apply text-white font-goldman text-4xl xl:text-3xl tracking-widest uppercase;
+  }
+  .cta-text {
+    @apply text-gray-400 font-teko text-xl xl:text-xl tracking-wide text-left mt-2;
+  }
+  .cta-button {
+    @apply mt-6 self-start relative px-8 py-3 bg-[#0A2E06] border border-green-500 text-green-500 font-goldman font-bold tracking-widest text-sm uppercase transition-all hover:text-black hover:bg-green-500 hover:shadow-[0_0_20px_rgba(16,154,0,0.6)] cursor-pointer;
+  }
+  .btn-bracket-tl {
+    @apply absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-green-500 group-hover:border-black transition-colors;
+  }
+  .btn-bracket-br {
+    @apply absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-green-500 group-hover:border-black transition-colors;
+  }
+
+  /* CCTV */
+  /* CCTV */
+  .cctv-container {
+    @apply w-full max-w-[min(100%,120vh)] mx-auto xl:mx-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 xl:self-center xl:justify-self-end z-10;
+  }
+  .cctv-video {
+    @apply w-full  aspect-video object-cover;
+  }
+
+
+  /* --- FEATURED PROJECTS CLASSES --- */
+  .projects-container {
+    @apply w-full max-w-[min(100%,120vh)] h-full xl:max-h-[65vh] max-h-[60vh] min-h-0 overflow-y-auto overflow-x-hidden  xl:mx-0 xl:col-start-2 xl:row-start-2 xl:row-span-2 xl:self-start xl:justify-self-end z-10 pr-4 pb-2;
+  }
+
+  /* Custom Sci-Fi Scrollbar for the Database */
+  .projects-container::-webkit-scrollbar { width: 6px; }
+  .projects-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+  .projects-container::-webkit-scrollbar-thumb { background: #109A00; border-radius: 10px; }
+
+  .projects-grid {
+    /* Switched from flex to grid */
+    @apply grid gap-6 font-teko;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .project-card {
+    @apply border border-green-500/50 p-3 bg-black/60 relative hover:border-green-500 transition-colors cursor-pointer flex flex-col ;
+  }
+  
+  .card-corner-tl {
+    @apply absolute top-0 left-0 w-2 h-2 border-t border-l border-green-500;
+  }
+  .card-corner-br {
+    @apply absolute bottom-0 right-0 w-2 h-2 border-b border-r border-green-500;
+  }
+  .project-img-wrapper {
+    @apply aspect-video bg-gray-900 border border-green-500/30 mb-3;
+  }
+  .project-img {
+    @apply w-full h-full bg-cover bg-center  opacity-70 group-hover:opacity-100 transition-opacity;
+  }
+  .project-title {
+    @apply text-green-500 font-goldman text-lg mb-2;
+  }
+  .project-details {
+    @apply text-gray-400 text-lg leading-tight mb-4 flex-1;
+  }
+  .project-label {
+    @apply text-green-700;
+  }
+  .project-btn {
+    @apply text-green-500 bg-[#0A2E06] border border-green-500/50 py-1 font-goldman text-sm group-hover:bg-green-500 group-hover:text-black transition-colors;
+  }
+
+  /* --- EXPANDED PROJECT VIEW --- */
+  .expanded-card {
+    @apply w-full border border-green-500 bg-black/90 flex flex-col p-6 relative;
+  }
+  
+  /* The new Grid Layout for the 3 boxes */
+  .expanded-grid {
+    @apply grid grid-cols-1 xl:grid-cols-2 gap-6 w-full;
+  }
+  
+  /* Generic styling for Box 1 and Box 3 */
+  .expanded-box {
+    @apply border border-green-500/30 bg-black/50 p-6 flex flex-col;
+  }
+  /* --- FULLSCREEN MODAL CLASSES --- */
+  .fullscreen-overlay {
+    @apply fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 cursor-zoom-out backdrop-blur-sm;
+  }
+  .fullscreen-img {
+    @apply w-auto h-auto max-w-full max-h-[90vh] object-contain border border-green-500/30 shadow-[0_0_30px_rgba(16,154,0,0.2)];
+  }
+  .fullscreen-close {
+    @apply absolute top-6 right-6 text-green-500 hover:text-black hover:bg-green-500 border border-green-500 w-10 h-10 flex items-center justify-center font-goldman text-xl transition-colors cursor-pointer z-[110];
+  }
+  .expand-btn {
+    @apply absolute top-2 right-2 bg-black/80 text-green-500 hover:bg-green-500 hover:text-black border border-green-500 px-3 py-1 font-goldman cursor-pointer transition-all z-10 text-sm hidden group-hover:block;
+  }
+
+  /* Box 2 (Carousel) */
+  .carousel-container {
+    @apply relative w-full border border-green-500/30 bg-black/50 flex items-center justify-center p-2 overflow-hidden;
+  }
+  .carousel-btn {
+    @apply absolute top-1/2 -translate-y-1/2 bg-black/80 text-green-500 hover:bg-green-500 hover:text-black border border-green-500 px-4 py-3 font-goldman cursor-pointer transition-all z-10 text-xl hidden group-hover:block;
+  }
+  .carousel-btn-left { 
+    @apply left-4; 
+  }
+  .carousel-btn-right { 
+    @apply right-4; 
+  }
+  .back-btn {
+    @apply self-start text-gray-400 font-goldman text-sm mb-6 hover:text-green-500 transition-colors cursor-pointer tracking-widest;
+  }
+  .link-btn {
+    @apply text-center text-green-500 bg-[#0A2E06] border border-green-500/50 py-2 font-goldman text-sm transition-colors block w-full hover:bg-green-500 hover:text-black;
+  }
+
+
+  /* --- SERVICES PAGE CLASSES --- */
+  .services-container {
+    @apply w-full h-full xl:max-h-[65vh] max-h-[60vh] overflow-y-auto overflow-x-hidden mx-auto lg:mx-0 lg:col-start-2 lg:row-start-2 lg:row-span-2 lg:self-start lg:justify-self-end z-10 pr-4 pb-12;
+  }
+  
+  /* Inherit the custom scrollbar from projects */
+  .services-container::-webkit-scrollbar { width: 6px; }
+  .services-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+  .services-container::-webkit-scrollbar-thumb { background: #109A00; border-radius: 10px; }
+
+  .services-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6 w-full font-teko;
+  }
+  .service-card {
+    @apply border border-green-500/30 bg-black/60 p-6 relative hover:border-green-500 transition-all flex flex-col min-h-[400px];
+  }
+  .service-header {
+    @apply flex flex-col sm:flex-row sm:items-center justify-between border-b border-green-500/30 pb-4 mb-4 gap-2;
+  }
+  .service-title {
+    @apply text-green-500 font-goldman text-2xl tracking-wider;
+  }
+  .service-tier {
+    @apply text-gray-500 font-goldman text-xs tracking-widest uppercase border border-gray-600 px-2 py-1 self-start sm:self-auto;
+  }
+  .service-desc {
+    @apply text-gray-300 text-xl leading-snug mb-6;
+  }
+  .service-features {
+    @apply flex flex-col gap-2 mb-8 flex-1;
+  }
+  .service-feature-item {
+    @apply text-gray-400 text-xl flex items-start gap-3;
+  }
+  .service-feature-icon {
+    @apply text-green-700 font-bold mt-1;
+  }
+  .service-btn {
+    @apply w-full text-center text-green-500 bg-[#0A2E06] border border-green-500/50 py-3 font-goldman tracking-widest text-sm transition-colors hover:bg-green-500 hover:text-black mt-auto;
+  }
+
+  
+  /* --- ABOUT / FOUNDER PAGE CLASSES --- */
+  .about-container {
+    @apply w-full h-full xl:max-h-[65vh] max-h-[60vh] overflow-y-auto overflow-x-hidden mx-auto lg:mx-0 lg:col-start-2 lg:row-start-2 lg:row-span-2 lg:self-start lg:justify-self-end z-10 pr-4 pb-12;
+  }
+  
+  .about-container::-webkit-scrollbar { width: 6px; }
+  .about-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+  .about-container::-webkit-scrollbar-thumb { background: #109A00; border-radius: 10px; }
+
+  .about-grid {
+    @apply grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 w-full font-teko items-start;
+  }
+  
+  /* Left Column: Profile Card */
+  .profile-card {
+    @apply border border-green-500/50 bg-black/60 p-6 flex flex-col relative hover:border-green-500 transition-colors lg:sticky lg:top-0;
+  }
+  .profile-img-wrapper {
+    @apply w-full aspect-square border border-green-500/30 mb-4 bg-gray-900 overflow-hidden relative;
+  }
+  
+  /* Right Column: Information Panels */
+  .info-panel {
+    @apply flex flex-col gap-6;
+  }
+  .info-section {
+    @apply border border-green-500/30 bg-black/50 p-6 relative;
+  }
+  .section-title {
+    @apply text-green-500 font-goldman text-2xl mb-4 uppercase tracking-widest border-b border-green-500/30 pb-2;
+  }
+  .skill-grid {
+    @apply flex flex-wrap gap-2 mt-3;
+  }
+  .skill-tag {
+    @apply border border-green-700 text-gray-300 px-3 py-1 font-goldman text-sm tracking-wide bg-[#0A2E06]/50 hover:bg-green-500 hover:text-black transition-colors cursor-default;
+  }
+  .timeline-item {
+    @apply mb-6 last:mb-0 relative pl-4 border-l border-green-500/30;
+  }
+  .timeline-dot {
+    @apply absolute -left-[5px] top-2 w-2 h-2 bg-green-500;
+  }
+  .timeline-title {
+    @apply text-green-400 font-goldman text-xl tracking-wide;
+  }
+  .timeline-date {
+    @apply text-gray-500 font-goldman text-sm mb-1;
+  }
+  .timeline-desc {
+    @apply text-gray-300 text-xl leading-snug;
+  }
+
+
+  /* --- CONTRIBUTIONS & EXPERIENCES CLASSES --- */
+  .contributions-container {
+    /* Height constraints applied exactly as requested! */
+    @apply w-full h-full max-h-[60vh] xl:max-h-[65vh] overflow-y-auto overflow-x-hidden mx-auto lg:mx-0 lg:col-start-2 lg:row-start-2 lg:row-span-2 lg:self-start lg:justify-self-end z-10 pr-4 pb-12;
+  }
+  
+  .contributions-container::-webkit-scrollbar { width: 6px; }
+  .contributions-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+  .contributions-container::-webkit-scrollbar-thumb { background: #109A00; border-radius: 10px; }
+
+  .log-card {
+    @apply border border-green-500/30 bg-black/60 p-6 relative hover:border-green-500 transition-all flex flex-col mb-6 last:mb-0;
+  }
+  .log-header {
+    @apply flex flex-col md:flex-row md:items-end justify-between border-b border-green-500/30 pb-3 mb-4 gap-4;
+  }
+  .log-role {
+    @apply text-green-500 font-goldman text-2xl tracking-widest leading-none;
+  }
+  .log-org {
+    @apply text-gray-400 font-goldman text-sm tracking-widest mt-1;
+  }
+  .log-meta {
+    @apply flex flex-col md:text-right text-green-700 font-goldman text-xs tracking-widest uppercase shrink-0;
+  }
+  .log-detail-item {
+    @apply text-gray-300 font-teko text-2xl leading-snug flex items-start gap-3 mb-2 last:mb-0;
+  }
+  .log-bullet {
+    @apply text-green-500 font-bold mt-1 opacity-70 group-hover:opacity-100 transition-opacity text-sm;
+  }
+
+  
+  /* --- CONTACT PAGE CLASSES --- */
+  .contact-container {
+    /* Height constraints applied exactly as requested */
+    @apply w-full h-full max-h-[60vh] xl:max-h-[65vh] overflow-y-auto overflow-x-hidden mx-auto lg:mx-0 lg:col-start-2 lg:row-start-2 lg:row-span-2 lg:self-start lg:justify-self-end z-10 pr-4 pb-12;
+  }
+  
+  .contact-container::-webkit-scrollbar { width: 6px; }
+  .contact-container::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.2); }
+  .contact-container::-webkit-scrollbar-thumb { background: #109A00; border-radius: 10px; }
+
+  .contact-grid {
+    @apply grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-6 w-full;
+  }
+  .contact-panel {
+    @apply border border-green-500/30 bg-black/60 p-6 relative flex flex-col hover:border-green-500/60 transition-colors h-full;
+  }
+  
+  /* Form Elements */
+  .form-group {
+    @apply flex flex-col gap-1 mb-4;
+  }
+  .form-label {
+    @apply text-green-700 font-goldman text-sm tracking-widest uppercase;
+  }
+  .form-input {
+    @apply bg-[#0A2E06]/30 border border-green-500/30 p-3 text-gray-300 font-teko text-2xl outline-none focus:border-green-500 focus:bg-[#0A2E06]/80 transition-all resize-none;
+  }
+  
+  /* Contact Info Elements */
+  .contact-info-text {
+    @apply text-gray-300 font-teko text-2xl tracking-wide flex flex-col gap-2 mb-6 pb-6 border-b border-green-500/30;
+  }
+  .social-grid {
+    @apply flex flex-col gap-3 mt-auto;
+  }
+}

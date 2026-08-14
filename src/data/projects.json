@@ -1,0 +1,71 @@
+[
+  {
+    "id": "JobUnder",
+    "title": "JOBUNDER",
+    "status": "COMPLETED",
+    "client": "Dr. Qari",
+    "date": "2025.09 - 2026.04",
+    "images_folder": "/Projects Images/Job Under/",
+    "images": [
+      "Home.png",
+      "Dashboard.png",
+      "Search Jobs.png",
+      "My Profile.png",
+      "Register.png",
+      "Stripe Subscription.png"
+    ],
+    "description": "An end-to-end recruitment platform optimizing the connection between job seekers and employers through advanced search algorithms, user dashboards, and tiered subscription access.",
+    "live_link": "",
+    "repo_link": ""
+  },
+  {
+    "id": "brightsmile-dental",
+    "title": "BRIGHTSMILE DENTAL CLINIC",
+    "status": "ARCHIVED",
+    "client": "Personal Project",
+    "date": "2026.08",
+    "images_folder": "/Projects Images/BrightSmile/",
+    "images": [
+      "Home.jpeg",
+      "Services.jpeg",
+      "Contacts.jpeg",
+      "Registration.jpeg"
+    ],
+    "description": "A modern, cohesive UI/UX design system for a dental clinic. Engineered to provide a welcoming digital experience featuring streamlined appointment booking, multi-step patient registration, and interactive location mapping.",
+    "live_link": "",
+    "repo_link": ""
+  },
+  {
+    "id": "aether-archives",
+    "title": "AETHER ARCHIVES CLOTHING",
+    "status": "ARCHIVED",
+    "client": "Personal Project",
+    "date": "2026.07",
+    "images_folder": "/Projects Images/AEATHER ARCHIVE/",
+    "images": [
+      "Home.png",
+      "Shop.png",
+      "T&C.png",
+      "Checkout.png"
+    ],
+    "description": "Architected a minimalist, brutalist e-commerce interface for a modern techwear brand. The UI/UX system utilizes high-contrast neon accents, stark concrete backgrounds, and sleek grid layouts to deliver a high-tech, secure shopping experience.",
+    "live_link": "",
+    "repo_link": ""
+  },
+  {
+    "id": "law-almizan",
+    "title": "AL-MIZAN LEGAL FIRM",
+    "status": "ARCHIVED",
+    "client": "Personal Project",
+    "date": "2026.07",
+    "images_folder": "/Projects Images/Al-Mizan/",
+    "images": [
+      "Home.jpeg",
+      "Services.jpeg",
+      "Contacts.jpeg"
+    ],
+    "description": "Architected a confident and authoritative web presence for a Saudi legal firm. The UI/UX system utilizes a deep green and gold color palette alongside structured grid layouts to project trust, professional excellence, and inclusive representation.",
+    "live_link": "",
+    "repo_link": ""
+  }
+]
