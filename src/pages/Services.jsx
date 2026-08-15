@@ -1,5 +1,7 @@
 import PageLayout from "../PageLayout";
 import { Link } from "react-router";
+import CommandButton from "../components/CommandButton";
+import { PanelCorners } from "../components/CornerMarks";
 
 const servicesData = [
   {
@@ -53,28 +55,22 @@ const servicesData = [
 ];
 
 export default function Services() {
-  const initButton = (
-    <Link to="/contacts" prefetch="intent" className="cta-button group inline-block">
-      <span className="btn-bracket-tl"></span>
-      <span className="btn-bracket-br"></span>
-      &gt; CONTACT_COMMAND<span className="animate-pulse">_</span>
-    </Link>
-  );
-
   return (
     <PageLayout
-      wText="Service"
-      gText="Protocols"
-      paragraph="Select a deployment package to initiate your digital infrastructure upgrade. Custom parameters available upon request."
-      button={initButton}
-      classes="services-container"
+      title="Service"
+      accent="Protocols"
+      description="Select a deployment package to initiate your digital infrastructure upgrade. Custom parameters available upon request."
+      action={
+        <CommandButton to="/contacts">
+          &gt; CONTACT_COMMAND<span className="command-cursor">_</span>
+        </CommandButton>
+      }
+      contentClassName="services-container"
     >
       <div className="services-grid">
         {servicesData.map((service) => (
-          <div key={service.id} className="service-card group">
-            {/* Card Corners */}
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+          <article key={service.id} className="service-card">
+            <PanelCorners />
 
             {/* Header */}
             <div className="service-header">
@@ -96,10 +92,10 @@ export default function Services() {
             </div>
 
             {/* Call to Action */}
-            <Link to="/contacts" prefetch="intent" className="service-btn group-hover:bg-green-500 group-hover:text-black">
+            <Link to="/contacts" prefetch="intent" className="service-button">
               &gt; INITIATE_PROTOCOL_
             </Link>
-          </div>
+          </article>
         ))}
       </div>
     </PageLayout>

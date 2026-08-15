@@ -1,6 +1,7 @@
 import PageLayout from "../PageLayout";
-import { Link } from "react-router";
 import CFI from "../assets/images/Confidentail Face Id.webp";
+import CommandButton from "../components/CommandButton";
+import { PanelCorners } from "../components/CornerMarks";
 
 // ==========================================
 // DATA DIRECTORY
@@ -104,71 +105,73 @@ const professionalDeployments = [
   },
 ];
 
+function Timeline({ items }) {
+  return items.map((item) => (
+    <div key={`${item.title}-${item.date}`} className="timeline-item">
+      <span className="timeline-dot" />
+      <h4 className="timeline-title">{item.title}</h4>
+      <p className="timeline-date">{item.date}</p>
+      <p className="timeline-desc">{item.description}</p>
+    </div>
+  ));
+}
+
 // ==========================================
 // MAIN COMPONENT
 // ==========================================
 
 export default function About() {
-  const hireButton = (
-    <Link
-      to="/services"
-      prefetch="intent"
-      className="cta-button group inline-block"
-    >
-      <span className="btn-bracket-tl"></span>
-      <span className="btn-bracket-br"></span>
-      &gt; INITIATE_CONTACT<span className="animate-pulse">_</span>
-    </Link>
-  );
-
   return (
     <PageLayout
-      wText="System"
-      gText="Admin"
-      paragraph="Accessing classified credentials for the lead architect and founder of ROMOZ.JS."
-      button={hireButton}
-      classes="about-container"
+      title="System"
+      accent="Admin"
+      description="Accessing classified credentials for the lead architect and founder of ROMOZ.JS."
+      action={
+        <CommandButton to="/services">
+          &gt; INITIATE_CONTACT<span className="command-cursor">_</span>
+        </CommandButton>
+      }
+      contentClassName="about-container"
     >
       <div className="about-grid">
         {/* --- LEFT COLUMN: IDENTITY CARD --- */}
-        <div className="profile-card group">
-          <div className="card-corner-tl"></div>
-          <div className="card-corner-br"></div>
+        <div className="profile-card">
+          <PanelCorners />
 
           <div className="profile-img-wrapper">
             <div
-              className="w-full h-full bg-cover bg-center grayscale contrast-125 opacity-80 group-hover:opacity-100 transition-opacity"
+              className="profile-image"
               style={{ backgroundImage: `url('${identityData.image}')` }}
             ></div>
-            <div className="absolute bottom-2 right-2 bg-black/80 border border-green-500/50 px-2 text-green-500 font-goldman text-xs">
+            <div className="profile-id">
               ID: {identityData.id}
             </div>
           </div>
 
-          <h2 className="text-green-500 font-goldman text-3xl mb-1 leading-none">
+          <h2 className="profile-name">
             {identityData.name}
           </h2>
-          <p className="text-gray-400 font-goldman tracking-widest text-sm mb-6 pb-4 border-b border-green-500/30">
+          <p className="profile-role">
             {identityData.role}
           </p>
 
-          <div className="flex flex-col gap-2 font-teko text-xl text-gray-300 mb-6">
+          <div className="profile-specs">
             {identityData.specs.map((spec, index) => (
               <p key={index}>
-                <span className="text-green-700">{spec.label}:</span>{" "}
+                <span className="accent-label">{spec.label}:</span>{" "}
                 {spec.value}
               </p>
             ))}
           </div>
 
-          <div className="flex flex-col gap-3 mt-auto">
+          <div className="profile-links">
             {identityData.links.map((link, index) => (
               <a
                 key={index}
                 href={link.url}
                 target={link.url.startsWith("http") ? "_blank" : "_self"}
                 rel="noreferrer"
-                className="project-btn text-center block w-full py-2"
+                className="project-button project-button--wide"
               >
                 {link.label}
               </a>
@@ -180,24 +183,22 @@ export default function About() {
         <div className="info-panel">
           {/* CORE DIRECTIVE */}
           <div className="info-section">
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+            <PanelCorners />
             <h3 className="section-title">CORE_DIRECTIVE</h3>
-            <p className="text-gray-300 font-teko text-2xl leading-snug">
+            <p className="body-copy">
               {coreDirective}
             </p>
           </div>
 
           {/* SKILL MATRIX */}
           <div className="info-section">
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+            <PanelCorners />
             <h3 className="section-title">SKILL_MATRIX</h3>
 
             {skillMatrix.map((matrix, index) => (
               <div key={index}>
                 <p
-                  className={`text-green-600 font-goldman text-sm tracking-widest ${index > 0 ? "mt-6" : "mt-4"}`}
+                  className="skill-category"
                 >
                   {matrix.category}
                 </p>
@@ -214,35 +215,18 @@ export default function About() {
 
           {/* ACHIEVEMENTS & AWARDS */}
           <div className="info-section">
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+            <PanelCorners />
             <h3 className="section-title">RECORDS_&_AWARDS</h3>
 
-            {recordsAndAwards.map((item, index) => (
-              <div key={index} className="timeline-item">
-                <div className="timeline-dot"></div>
-                <h4 className="timeline-title">{item.title}</h4>
-                <p className="timeline-date">{item.date}</p>
-                {/* React strictly parses raw HTML if needed, but a standard string works for simple text. */}
-                <p className="timeline-desc">{item.description}</p>
-              </div>
-            ))}
+            <Timeline items={recordsAndAwards} />
           </div>
 
           {/* PROFESSIONAL DEPLOYMENTS */}
           <div className="info-section">
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+            <PanelCorners />
             <h3 className="section-title">PROFESSIONAL_DEPLOYMENTS</h3>
 
-            {professionalDeployments.map((item, index) => (
-              <div key={index} className="timeline-item">
-                <div className="timeline-dot"></div>
-                <h4 className="timeline-title">{item.title}</h4>
-                <p className="timeline-date">{item.date}</p>
-                <p className="timeline-desc">{item.description}</p>
-              </div>
-            ))}
+            <Timeline items={professionalDeployments} />
           </div>
         </div>
       </div>

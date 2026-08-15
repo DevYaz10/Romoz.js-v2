@@ -12,16 +12,29 @@ import globeVideo from "./assets/videos/CCTV/CCTV Footage - Globe Roundabout.web
 import cornicheVideo from "./assets/videos/CCTV/CCTV Footage - Corniche.webm";
 import flagVideo from "./assets/videos/CCTV/CCTV Footage - Jeddah's Big flag.webm";
 
+const wallpaperCorners = ["top-left", "bottom-left", "top-right", "bottom-right"];
+
+const menuItems = [
+  { text: "About", to: "/about", video: fountainVideo },
+  { text: "Featured Project", to: "/featured-projects", video: towerVideo },
+  { text: "Contributions & Experiences", to: "/contributions", video: globeVideo },
+  { text: "Contacts", to: "/contacts", video: cornicheVideo },
+  { text: "Services", to: "/services", video: flagVideo },
+];
+
 function App() {
   const [activeVideo, setActiveVideo] = useState(fountainVideo);
 
   return (
     <div className="app-wrapper">
-      {/* WALLPAPER CORNERS */}
-      <img src={WCorner} alt="" className="wallpaper-corner corner-tl" />
-      <img src={WCorner} alt="" className="wallpaper-corner corner-bl" />
-      <img src={WCorner} alt="" className="wallpaper-corner corner-tr" />
-      <img src={WCorner} alt="" className="wallpaper-corner corner-br" />
+      {wallpaperCorners.map((position) => (
+        <img
+          key={position}
+          src={WCorner}
+          alt=""
+          className={`wallpaper-corner wallpaper-corner--${position}`}
+        />
+      ))}
 
       {/* 1. Logo */}
       <Link to="/" className="logo-container">
@@ -37,33 +50,15 @@ function App() {
       {/* 3. THE OUTLET (Injects Home.jsx or FeaturedProjects.jsx here) */}
       <Outlet context={{ activeVideo }} />
 
-      {/* 4. Menu Items */}
       <div className="menu-container">
-        <MenuItem
-          text="About"
-          to="/about"
-          onMouseEnter={() => setActiveVideo(fountainVideo)}
-        />
-        <MenuItem
-          text="Featured Project"
-          to="/featured-projects"
-          onMouseEnter={() => setActiveVideo(towerVideo)}
-        />
-        <MenuItem
-          text="Contributions & Experiences"
-          to="/contributions"
-          onMouseEnter={() => setActiveVideo(globeVideo)}
-        />
-        <MenuItem
-          text="Contacts"
-          to="/contacts"
-          onMouseEnter={() => setActiveVideo(cornicheVideo)}
-        />
-        <MenuItem
-          text="Services"
-          to="/services"
-          onMouseEnter={() => setActiveVideo(flagVideo)}
-        />
+        {menuItems.map((item) => (
+          <MenuItem
+            key={item.to}
+            text={item.text}
+            to={item.to}
+            onMouseEnter={() => setActiveVideo(item.video)}
+          />
+        ))}
       </div>
     </div>
   );

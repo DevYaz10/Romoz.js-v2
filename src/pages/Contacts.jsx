@@ -1,5 +1,6 @@
 import PageLayout from "../PageLayout";
-import { Link } from "react-router";
+import CommandButton from "../components/CommandButton";
+import { PanelCorners } from "../components/CornerMarks";
 
 // ==========================================
 // DATA DIRECTORY (DRY METHODOLOGY)
@@ -45,30 +46,25 @@ const formFields = [
 // ==========================================
 
 export default function Contacts() {
-  const commsButton = (
-    <Link to="/services" prefetch="intent" className="cta-button group inline-block">
-      <span className="btn-bracket-tl"></span>
-      <span className="btn-bracket-br"></span>
-      &gt; Initialize_Services<span className="animate-pulse">_</span>
-    </Link>
-  );
-
   return (
     <PageLayout
-      wText="Secure"
-      gText="Comms"
-      paragraph="Establish a direct connection with the system architect. Awaiting transmission data."
-      button={commsButton}
-      classes="contact-container"
+      title="Secure"
+      accent="Comms"
+      description="Establish a direct connection with the system architect. Awaiting transmission data."
+      action={
+        <CommandButton to="/services">
+          &gt; Initialize_Services<span className="command-cursor">_</span>
+        </CommandButton>
+      }
+      contentClassName="contact-container"
     >
       <div className="contact-grid">
         
         {/* --- LEFT COLUMN: SECURE MESSAGE FORM --- */}
         <div className="contact-panel">
-          <div className="card-corner-tl"></div>
-          <div className="card-corner-br"></div>
+          <PanelCorners />
           
-          <h2 className="text-green-500 font-goldman text-2xl mb-6 tracking-widest border-b border-green-500/30 pb-2">
+          <h2 className="section-title">
             COMMS_TERMINAL
           </h2>
 
@@ -78,10 +74,10 @@ export default function Contacts() {
             directly to your gmail address without needing a backend!
             (You will need to click an activation link in your email the very first time you test it).
           */}
-          <form action="https://formsubmit.co/webdevyaz10@gmail.com" method="POST" className="flex flex-col h-full">
+          <form action="https://formsubmit.co/webdevyaz10@gmail.com" method="POST" className="contact-form">
             
             {/* Honeypot to prevent spam bots */}
-            <input type="text" name="_honey" className="hidden" />
+            <input type="text" name="_honey" className="form-honeypot" />
             {/* Disable Captcha for a smoother sci-fi feel */}
             <input type="hidden" name="_captcha" value="false" />
             {/* Success redirect page (Optional: replace with a custom thank you page URL later) */}
@@ -103,38 +99,35 @@ export default function Contacts() {
             ))}
 
             {/* The Message Textarea */}
-            <div className="form-group flex-1">
+            <div className="form-group form-group--grow">
               <label htmlFor="message" className="form-label">DATA_PAYLOAD (MESSAGE)</label>
               <textarea 
                 name="message" 
                 id="message" 
                 required 
                 placeholder="ENTER_MESSAGE_DATA_"
-                className="form-input h-full min-h-37.5"
+                className="form-input form-textarea"
               ></textarea>
             </div>
 
-            <button type="submit" className="cta-button group w-full mt-4 self-stretch!">
-              <span className="btn-bracket-tl"></span>
-              <span className="btn-bracket-br"></span>
+            <CommandButton type="submit" className="command-button--wide">
               &gt; TRANSMIT_PAYLOAD_
-            </button>
+            </CommandButton>
           </form>
         </div>
 
         {/* --- RIGHT COLUMN: DIRECTORIES & LINKS --- */}
         <div className="contact-panel">
-          <div className="card-corner-tl"></div>
-          <div className="card-corner-br"></div>
+          <PanelCorners />
 
-          <h2 className="text-green-500 font-goldman text-2xl mb-6 tracking-widest border-b border-green-500/30 pb-2">
+          <h2 className="section-title">
             SYS_DIRECTORY
           </h2>
 
           <div className="contact-info-text">
             {contactDetails.map((detail, index) => (
               <p key={index}>
-                <span className="text-green-700 font-goldman text-sm tracking-widest uppercase block -mb-1.25">
+                <span className="contact-label">
                   {detail.label}
                 </span>
                 {detail.value}
@@ -142,7 +135,7 @@ export default function Contacts() {
             ))}
           </div>
 
-          <h3 className="text-green-700 font-goldman text-sm tracking-widest uppercase mb-2">
+          <h3 className="contact-subtitle">
             EXTERNAL_NODES
           </h3>
           
@@ -153,7 +146,7 @@ export default function Contacts() {
                 href={link.url} 
                 target="_blank" 
                 rel="noreferrer" 
-                className="service-btn text-center block w-full py-2"
+                className="service-button service-button--compact"
               >
                 {link.label}
               </a>

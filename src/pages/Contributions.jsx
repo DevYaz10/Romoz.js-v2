@@ -1,6 +1,6 @@
 import PageLayout from "../PageLayout";
-import { Link } from "react-router";
-
+import CommandButton from "../components/CommandButton";
+import { PanelCorners } from "../components/CornerMarks";
 
 // ==========================================
 // DATA DIRECTORY (DRY METHODOLOGY)
@@ -38,28 +38,22 @@ const experiencesData = [
 // ==========================================
 
 export default function Contributions() {
-  const logButton = (
-    <Link to="/services" prefetch="intent" className="cta-button group inline-block">
-      <span className="btn-bracket-tl"></span>
-      <span className="btn-bracket-br"></span>
-      &gt; Initialize_Services<span className="animate-pulse">_</span>
-    </Link>
-  );
-
   return (
     <PageLayout
-      wText="Field"
-      gText="Operations"
-      paragraph="Accessing historical logs of volunteer deployments, community outreach, and team leadership initiatives."
-      button={logButton}
-      classes="contributions-container"
+      title="Field"
+      accent="Operations"
+      description="Accessing historical logs of volunteer deployments, community outreach, and team leadership initiatives."
+      action={
+        <CommandButton to="/services">
+          &gt; Initialize_Services<span className="command-cursor">_</span>
+        </CommandButton>
+      }
+      contentClassName="contributions-container"
     >
-      <div className="w-full">
+      <div className="logs-list">
         {experiencesData.map((exp) => (
-          <div key={exp.id} className="log-card group">
-            {/* Aesthetic Corners */}
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+          <article key={exp.id} className="log-card">
+            <PanelCorners />
             
             {/* Header / Meta Data */}
             <div className="log-header">
@@ -74,16 +68,16 @@ export default function Contributions() {
             </div>
 
             {/* Bullet Points */}
-            <div className="flex flex-col">
-              {exp.details.map((detail, index) => (
-                <div key={index} className="log-detail-item">
+            <div className="log-details">
+              {exp.details.map((detail) => (
+                <div key={detail} className="log-detail-item">
                   <span className="log-bullet">[+]</span>
                   <p>{detail}</p>
                 </div>
               ))}
             </div>
 
-          </div>
+          </article>
         ))}
       </div>
     </PageLayout>

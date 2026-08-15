@@ -1,22 +1,18 @@
 import { Link } from "react-router";
-import cornerSvg from "../assets/images/Corner.svg";
+import { FrameCorners } from "./CornerMarks";
 
 export default function MenuItem({ text, onMouseEnter, to }) {
   return (
     <Link
       to={to}
-      className="group relative flex flex-col h-full w-full"
+      className="menu-item"
       onMouseEnter={onMouseEnter}
       prefetch="intent"
     >
-      <img src={cornerSvg} className="corner hidden group-hover:block left-0 top-0" />
-      <img src={cornerSvg} className="corner hidden group-hover:block left-0 bottom-0 -rotate-90" />
-      <img src={cornerSvg} className="corner hidden group-hover:block right-0 top-0 rotate-90" />
-      <img src={cornerSvg} className="corner hidden group-hover:block right-0 bottom-0 -rotate-180" />
-
-      <div className="menuHoverBox">
-        <div className="menuTextContainer">
-          <span className="menuArrow">{">"}</span>
+      <FrameCorners hoverOnly />
+      <div className="menu-hover-box">
+        <div className="menu-text">
+          <span className="menu-arrow">{">"}</span>
           {text}
         </div>
       </div>

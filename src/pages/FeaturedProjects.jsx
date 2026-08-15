@@ -2,11 +2,26 @@ import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import PageLayout from "../PageLayout";
 import rawProjectsData from "../data/projects.json";
+import CommandButton from "../components/CommandButton";
+import { PanelCorners } from "../components/CornerMarks";
 
 const projectsData = rawProjectsData.map(proj => ({
   ...proj,
   images: proj.images.map(img => proj.images_folder ? `${proj.images_folder}${img}` : img)
 }));
+
+const projectFields = ["status", "client", "date"];
+
+function ProjectMeta({ project, includeId = false }) {
+  const fields = includeId ? [...projectFields, "id"] : projectFields;
+
+  return fields.map((field) => (
+    <p key={field}>
+      <span className="accent-label">{field === "id" ? "FILE_ID" : field.toUpperCase()}:</span>{" "}
+      {field === "id" ? project.id.toUpperCase() : project[field]}
+    </p>
+  ));
+}
 
 // --- SUB-COMPONENT: EXPANDED VIEW WITH CAROUSEL ---
 function ExpandedProject({ project, onClose }) {
@@ -44,13 +59,12 @@ function ExpandedProject({ project, onClose }) {
 
   return (
     <div className="expanded-card">
-      <div className="card-corner-tl"></div>
-      <div className="card-corner-br"></div>
+      <PanelCorners />
 
       {/* Back Button */}
-      <button onClick={onClose} className="back-btn group">
+      <button onClick={onClose} className="back-btn">
         &lt; CLOSE_FILE
-        <span className="animate-pulse opacity-0 group-hover:opacity-100">_</span>
+        <span className="back-button-cursor">_</span>
       </button>
 
       {/* CSS GRID CONTAINER */}
@@ -58,21 +72,18 @@ function ExpandedProject({ project, onClose }) {
         
         {/* === BOX 1: TITLE & FILE DATA === */}
         <div className="expanded-box">
-          <h2 className="text-green-500 font-goldman text-3xl mb-6">
+          <h2 className="expanded-title">
             {project.title}
           </h2>
 
-          <div className="flex flex-col gap-2 font-teko text-xl text-gray-300">
-            <p><span className="project-label">STATUS:</span> {project.status}</p>
-            <p><span className="project-label">CLIENT:</span> {project.client}</p>
-            <p><span className="project-label">DATE:</span> {project.date}</p>
-            <p><span className="project-label">FILE_ID:</span> {project.id.toUpperCase()}</p>
+          <div className="project-meta project-meta--expanded">
+            <ProjectMeta project={project} includeId />
           </div>
         </div>
 
         {/* === BOX 2: IMAGE CAROUSEL === */}
         <div
-          className="carousel-container group"
+          className="carousel-container"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchCancel={() => { touchStartX.current = null; }}
@@ -99,29 +110,29 @@ function ExpandedProject({ project, onClose }) {
             alt={project.title}
             // Added onDoubleClick and cursor-zoom-in pointer
             onDoubleClick={() => setIsFullscreen(true)}
-            className="w-full h-auto max-h-100 object-contain mx-auto cursor-zoom-in"
+            className="carousel-image"
           />
 
           {/* Image Counter HUD */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 border border-green-500/50 px-4 py-1 text-green-500 font-goldman text-xs tracking-widest">
+          <div className="image-counter">
             IMG: 0{imgIndex + 1} / 0{project.images.length}
           </div>
         </div>
 
         {/* === BOX 3: DESCRIPTION & LINKS === */}
-        <div className="expanded-box lg:col-span-2">
-          <p className="text-gray-400 font-teko text-2xl leading-snug mb-6">
+        <div className="expanded-box expanded-box--wide">
+          <p className="expanded-description">
             {project.description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+          <div className="expanded-links">
             {project.live_link && (
-              <a href={project.live_link} target="_blank" rel="noreferrer" className="link-btn sm:w-auto px-8">
+              <a href={project.live_link} target="_blank" rel="noreferrer" className="link-button">
                 &gt; INITIALIZE_LIVE_PREVIEW_
               </a>
             )}
             {project.repo_link && (
-              <a href={project.repo_link} target="_blank" rel="noreferrer" className="link-btn sm:w-auto px-8">
+              <a href={project.repo_link} target="_blank" rel="noreferrer" className="link-button">
                 &gt; ACCESS_SOURCE_CODE_
               </a>
             )}
@@ -133,7 +144,7 @@ function ExpandedProject({ project, onClose }) {
       {/* === FULLSCREEN MODAL (NOW USING A PORTAL) === */}
       {isFullscreen && createPortal(
         <div 
-          className="fullscreen-overlay group" 
+          className="fullscreen-overlay" 
           onClick={() => setIsFullscreen(false)}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -152,13 +163,13 @@ function ExpandedProject({ project, onClose }) {
             <>
               <button 
                 onClick={(e) => { e.stopPropagation(); prevImage(); }} 
-                className="carousel-btn carousel-btn-left fixed! md:!left-12! z-110"
+                className="carousel-btn carousel-btn-left carousel-btn--fullscreen"
               >
                 &lt;
               </button>
               <button 
                 onClick={(e) => { e.stopPropagation(); nextImage(); }} 
-                className="carousel-btn carousel-btn-right fixed! md:!right-12! z-110"
+                className="carousel-btn carousel-btn-right carousel-btn--fullscreen"
               >
                 &gt;
               </button>
@@ -172,7 +183,7 @@ function ExpandedProject({ project, onClose }) {
             className="fullscreen-img"
           />
 
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-black/80 border border-green-500/50 px-6 py-2 text-green-500 font-goldman tracking-widest z-[110]">
+          <div className="image-counter image-counter--fullscreen">
             IMG: 0{imgIndex + 1} / 0{project.images.length}
           </div>
         </div>,
@@ -208,9 +219,7 @@ export default function FeaturedProjects() {
 
   // NEW: The Dynamic Button/Search Component
   const dbButton = isSearchActive ? (
-    <div className="relative mt-6 self-start w-full sm:w-80">
-      <span className="btn-bracket-tl"></span>
-      <span className="btn-bracket-br"></span>
+    <div className="search-wrapper">
       <input
         ref={searchInputRef}
         type="text"
@@ -223,39 +232,35 @@ export default function FeaturedProjects() {
           }
         }}
         placeholder="> ENTER_QUERY_"
-        className="w-full px-8 py-3 bg-[#0A2E06] border border-green-500 text-green-500 font-goldman font-bold tracking-widest text-sm uppercase outline-none focus:shadow-[0_0_20px_rgba(16,154,0,0.6)] transition-all placeholder:text-green-700"
+        className="search-input"
       />
     </div>
   ) : (
-    <button
-      className="cta-button group"
+    <CommandButton
       onClick={() => {
         setSelectedProject(null);
         setIsSearchActive(true);
       }}
     >
-      <span className="btn-bracket-tl"></span>
-      <span className="btn-bracket-br"></span>
-      &gt; Query_Database<span className="animate-pulse">_</span>
-    </button>
+      &gt; Query_Database<span className="command-cursor">_</span>
+    </CommandButton>
   );
 
   return (
     <PageLayout
-      wText="Project"
-      gText="Database"
-      paragraph="Accessing classified featured records. Select a directory to view project specifications."
-      button={dbButton}
-      classes="projects-container"
+      title="Project"
+      accent="Database"
+      description="Accessing classified featured records. Select a directory to view project specifications."
+      action={dbButton}
+      contentClassName="projects-container"
     >
       {/* Hide the grid if a project is selected */}
-      <div className={`projects-grid ${selectedProject ? "hidden" : ""}`}>
+      <div className={`projects-grid${selectedProject ? " projects-grid--hidden" : ""}`}>
         
         {/* Render the FILTERED projects instead of all of them */}
         {filteredProjects.map((project) => (
-          <div key={project.id} className="project-card group">
-            <div className="card-corner-tl"></div>
-            <div className="card-corner-br"></div>
+          <article key={project.id} className="project-card">
+            <PanelCorners />
 
             <div className="project-img-wrapper">
               <div
@@ -267,33 +272,25 @@ export default function FeaturedProjects() {
             <h3 className="project-title">{project.title}</h3>
 
             <div className="project-details">
-              <p>
-                <span className="project-label">STATUS:</span> {project.status}
-              </p>
-              <p>
-                <span className="project-label">CLIENT:</span> {project.client}
-              </p>
-              <p>
-                <span className="project-label">DATE:</span> {project.date}
-              </p>
+              <ProjectMeta project={project} />
             </div>
 
             <button
-              className="project-btn"
+              className="project-button"
               onClick={() => setSelectedProject(project)}
             >
               &gt; ACCESS FILE_
             </button>
-          </div>
+          </article>
         ))}
 
         {/* Display a "No Results" message if the search yields nothing */}
         {filteredProjects.length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center p-12 border border-green-500/30 bg-black/60">
-            <p className="text-green-500 font-goldman text-xl tracking-widest animate-pulse">
+          <div className="no-results">
+            <p className="no-results-title">
               [ NO_RECORDS_FOUND ]
             </p>
-            <p className="text-gray-400 font-teko text-lg mt-2">
+            <p className="no-results-text">
               Adjust your query parameters and try again.
             </p>
           </div>
@@ -309,7 +306,7 @@ export default function FeaturedProjects() {
       )}
 
       {/* INVISIBLE PRELOADER */}
-      <div className="hidden">
+      <div className="project-preloader">
         {projectsData.map((proj) =>
           proj.images.map((imgUrl) => (
             <img key={imgUrl} src={imgUrl} alt="preload" />
