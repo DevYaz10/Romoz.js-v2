@@ -122,13 +122,13 @@ function ExpandedProject({ project, onClose }) {
             <>
               <button 
                 onClick={(e) => { e.stopPropagation(); prevImage(); }} 
-                className="carousel-btn carousel-btn-left !fixed md:!left-12 z-[110]"
+                className="carousel-btn carousel-btn-left fixed! md:!left-12! z-110"
               >
                 &lt;
               </button>
               <button 
                 onClick={(e) => { e.stopPropagation(); nextImage(); }} 
-                className="carousel-btn carousel-btn-right !fixed md:!right-12 z-[110]"
+                className="carousel-btn carousel-btn-right fixed! md:!right-12! z-110"
               >
                 &gt;
               </button>
