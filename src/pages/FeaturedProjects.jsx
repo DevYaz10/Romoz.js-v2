@@ -11,6 +11,7 @@ const projectsData = rawProjectsData.map(proj => ({
 // --- SUB-COMPONENT: EXPANDED VIEW WITH CAROUSEL ---
 function ExpandedProject({ project, onClose }) {
   const [imgIndex, setImgIndex] = useState(0);
+  const touchStartX = useRef(null);
   
   // NEW: Fullscreen state
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -21,6 +22,24 @@ function ExpandedProject({ project, onClose }) {
   };
   const prevImage = () => {
     setImgIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1));
+  };
+
+  const handleTouchStart = (event) => {
+    touchStartX.current = event.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (event) => {
+    if (touchStartX.current === null || project.images.length < 2) return;
+
+    const touchDeltaX = event.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+
+    if (Math.abs(touchDeltaX) < 40) return;
+    if (touchDeltaX < 0) {
+      nextImage();
+    } else {
+      prevImage();
+    }
   };
 
   return (
@@ -52,7 +71,12 @@ function ExpandedProject({ project, onClose }) {
         </div>
 
         {/* === BOX 2: IMAGE CAROUSEL === */}
-        <div className="carousel-container group">
+        <div
+          className="carousel-container group"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={() => { touchStartX.current = null; }}
+        >
           
           {/* NEW: Expand Button */}
           <button 
@@ -111,9 +135,15 @@ function ExpandedProject({ project, onClose }) {
         <div 
           className="fullscreen-overlay group" 
           onClick={() => setIsFullscreen(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          onTouchCancel={() => { touchStartX.current = null; }}
         >
           {/* Top Right 'X' Button */}
-          <button className="fullscreen-close">
+          <button
+            className="fullscreen-close"
+            onClick={() => setIsFullscreen(false)}
+          >
             X
           </button>
 
@@ -138,6 +168,7 @@ function ExpandedProject({ project, onClose }) {
           <img
             src={project.images[imgIndex]}
             alt={project.title}
+            onClick={(e) => e.stopPropagation()}
             className="fullscreen-img"
           />
 

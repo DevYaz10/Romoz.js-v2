@@ -178,9 +178,17 @@
     @apply absolute top-2 right-2 bg-black/80 text-green-500 hover:bg-green-500 hover:text-black border border-green-500 px-3 py-1 font-goldman cursor-pointer transition-all z-10 text-sm hidden group-hover:block;
   }
 
+  /* Touch devices do not have a hover state, so keep the expand control visible. */
+  @media (hover: none), (pointer: coarse) {
+    .expand-btn {
+      @apply block;
+    }
+  }
+
   /* Box 2 (Carousel) */
   .carousel-container {
     @apply relative w-full border border-green-500/30 bg-black/50 flex items-center justify-center p-2 overflow-hidden;
+    touch-action: pan-y;
   }
   .carousel-btn {
     @apply absolute top-1/2 -translate-y-1/2 bg-black/80 text-green-500 hover:bg-green-500 hover:text-black border border-green-500 px-4 py-3 font-goldman cursor-pointer transition-all z-10 text-xl hidden group-hover:block;
@@ -190,6 +198,9 @@
   }
   .carousel-btn-right { 
     @apply right-4; 
+  }
+  .fullscreen-overlay {
+    touch-action: pan-y;
   }
   .back-btn {
     @apply self-start text-gray-400 font-goldman text-sm mb-6 hover:text-green-500 transition-colors cursor-pointer tracking-widest;
