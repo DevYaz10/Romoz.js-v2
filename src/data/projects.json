@@ -19,20 +19,21 @@
     "repo_link": ""
   },
   {
-    "id": "brightsmile-dental",
-    "title": "BRIGHTSMILE DENTAL CLINIC",
-    "status": "ARCHIVED",
+    "id": "medicare-central",
+    "title": "MEDICARE CENTRAL",
+    "status": "UNPUBLISHED",
     "client": "Personal Project",
     "date": "2026.08",
-    "images_folder": "/Projects Images/BrightSmile/",
+    "images_folder": "/Projects Images/MediCare Central/",
     "images": [
-      "Home.jpeg",
-      "Services.jpeg",
-      "Contacts.jpeg",
-      "Registration.jpeg"
+      "Home.png",
+      "Services.png",
+      "Doctors.png",
+      "About.png",
+      "Contacts.png"
     ],
-    "description": "A modern, cohesive UI/UX design system for a dental clinic. Engineered to provide a welcoming digital experience featuring streamlined appointment booking, multi-step patient registration, and interactive location mapping.",
-    "live_link": "",
+    "description": "A modern, cohesive UI/UX design system for a Medical Center. Engineered to provide a welcoming digital experience featuring streamlined appointment booking, multi-step patient registration, and reviewing team members",
+    "live_link": "https://medi-care-central.vercel.app/",
     "repo_link": ""
   },
   {
