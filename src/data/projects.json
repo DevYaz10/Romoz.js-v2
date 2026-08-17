@@ -37,6 +37,25 @@
     "repo_link": ""
   },
   {
+    "id": "extreme-care",
+    "title": "EXTREME CARE",
+    "status": "UNPUBLISHED",
+    "client": "Personal Project",
+    "date": "2026.08",
+    "images_folder": "/Projects Images/Extreme Care/",
+    "images": [
+      "Home.jpg",
+      "Services.jpg",
+      "Projects.png",
+      "Prices.png",
+      "About.png",
+      "Contacts.png"
+    ],
+    "description": "Polishing, PPF paint protection, thermal tinting and nano-ceramic coating — by certified technicians using genuine materials, with a written warranty up to 5 years.",
+    "live_link": "https://extreme-care.vercel.app",
+    "repo_link": ""
+  },
+  {
     "id": "aether-archives",
     "title": "AETHER ARCHIVES CLOTHING",
     "status": "ARCHIVED",
