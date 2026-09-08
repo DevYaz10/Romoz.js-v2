@@ -32,34 +32,42 @@ function App() {
           key={position}
           src={WCorner}
           alt=""
+          aria-hidden="true"
           className={`wallpaper-corner wallpaper-corner--${position}`}
         />
       ))}
 
       {/* 1. Logo */}
-      <Link to="/" className="logo-container">
-        <img src={logoIcon} alt="Romoz.JS Icon" className="logo-image" />
-        <img src={logoText} alt="ROMOZ JS" className="logo-image" />
-      </Link>
+      <header className="app-header">
+        <Link to="/" className="logo-container" aria-label="Romoz.JS Home">
+          <img src={logoIcon} alt="Romoz.JS Logo Icon" className="logo-image" />
+          <img src={logoText} alt="ROMOZ JS Branding Text" className="logo-image" />
+        </Link>
+      </header>
 
       {/* 2. Radar */}
-      <div className="radar-container">
+      <div className="radar-container" aria-hidden="true">
         <video src={radarVideo} autoPlay loop muted className="radar-video" />
       </div>
 
-      {/* 3. THE OUTLET (Injects Home.jsx or FeaturedProjects.jsx here) */}
-      <Outlet context={{ activeVideo }} />
+      {/* 3. THE OUTLET */}
+      <main className="app-main">
+        <Outlet context={{ activeVideo }} />
+      </main>
 
-      <div className="menu-container">
-        {menuItems.map((item) => (
-          <MenuItem
-            key={item.to}
-            text={item.text}
-            to={item.to}
-            onMouseEnter={() => setActiveVideo(item.video)}
-          />
-        ))}
-      </div>
+      {/* 4. Semantic Navigation Bar */}
+      <nav className="menu-container" aria-label="Main Navigation">
+        <ul>
+          {menuItems.map((item) => (
+            <MenuItem
+              key={item.to}
+              text={item.text}
+              to={item.to}
+              onMouseEnter={() => setActiveVideo(item.video)}
+            />
+          ))}
+        </ul>
+      </nav>
     </div>
   );
 }

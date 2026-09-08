@@ -45,7 +45,7 @@ export default function Contributions() {
       description="Accessing historical logs of volunteer deployments, community outreach, and team leadership initiatives."
       action={
         <CommandButton to="/services">
-          &gt; Initialize_Services<span className="command-cursor">_</span>
+          &gt; Initialize_Services<span className="command-cursor" aria-hidden="true">_</span>
         </CommandButton>
       }
       contentClassName="contributions-container"
@@ -56,7 +56,7 @@ export default function Contributions() {
             <PanelCorners />
             
             {/* Header / Meta Data */}
-            <div className="log-header">
+            <header className="log-header">
               <div>
                 <h3 className="log-role">{exp.role}</h3>
                 <p className="log-org">// {exp.organization}</p>
@@ -65,17 +65,17 @@ export default function Contributions() {
                 <span>DATE: {exp.date}</span>
                 <span>STATUS: {exp.status}</span>
               </div>
-            </div>
+            </header>
 
             {/* Bullet Points */}
-            <div className="log-details">
-              {exp.details.map((detail) => (
-                <div key={detail} className="log-detail-item">
-                  <span className="log-bullet">[+]</span>
+            <ul className="log-details">
+              {exp.details.map((detail, index) => (
+                <li key={index} className="log-detail-item">
+                  <span className="log-bullet" aria-hidden="true">[+]</span>
                   <p>{detail}</p>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
 
           </article>
         ))}

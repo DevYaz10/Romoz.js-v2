@@ -1,5 +1,5 @@
-import PageLayout from "../PageLayout";
 import { Link } from "react-router";
+import PageLayout from "../PageLayout";
 import CommandButton from "../components/CommandButton";
 import { PanelCorners } from "../components/CornerMarks";
 
@@ -62,7 +62,7 @@ export default function Services() {
       description="Select a deployment package to initiate your digital infrastructure upgrade. Custom parameters available upon request."
       action={
         <CommandButton to="/contacts">
-          &gt; CONTACT_COMMAND<span className="command-cursor">_</span>
+          &gt; CONTACT_COMMAND<span className="command-cursor" aria-hidden="true">_</span>
         </CommandButton>
       }
       contentClassName="services-container"
@@ -73,23 +73,23 @@ export default function Services() {
             <PanelCorners />
 
             {/* Header */}
-            <div className="service-header">
+            <header className="service-header">
               <h3 className="service-title">{service.title}</h3>
               <span className="service-tier">{service.tier}</span>
-            </div>
+            </header>
 
             {/* Description */}
             <p className="service-desc">{service.description}</p>
 
             {/* Features List */}
-            <div className="service-features">
+            <ul className="service-features">
               {service.features.map((feature, index) => (
-                <div key={index} className="service-feature-item">
-                  <span className="service-feature-icon">&gt;</span>
+                <li key={index} className="service-feature-item">
+                  <span className="service-feature-icon" aria-hidden="true">&gt;</span>
                   <span>{feature}</span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
 
             {/* Call to Action */}
             <Link to="/contacts" prefetch="intent" className="service-button">

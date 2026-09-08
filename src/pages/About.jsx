@@ -106,14 +106,18 @@ const professionalDeployments = [
 ];
 
 function Timeline({ items }) {
-  return items.map((item) => (
-    <div key={`${item.title}-${item.date}`} className="timeline-item">
-      <span className="timeline-dot" />
-      <h4 className="timeline-title">{item.title}</h4>
-      <p className="timeline-date">{item.date}</p>
-      <p className="timeline-desc">{item.description}</p>
-    </div>
-  ));
+  return (
+    <ul className="list-none p-0 m-0">
+      {items.map((item) => (
+        <li key={`${item.title}-${item.date}`} className="timeline-item">
+          <span className="timeline-dot" aria-hidden="true" />
+          <h4 className="timeline-title">{item.title}</h4>
+          <p className="timeline-date">{item.date}</p>
+          <p className="timeline-desc">{item.description}</p>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 // ==========================================
@@ -128,32 +132,36 @@ export default function About() {
       description="Accessing classified credentials for the lead architect and founder of ROMOZ.JS."
       action={
         <CommandButton to="/services">
-          &gt; INITIATE_CONTACT<span className="command-cursor">_</span>
+          &gt; INITIATE_CONTACT<span className="command-cursor" aria-hidden="true">_</span>
         </CommandButton>
       }
       contentClassName="about-container"
     >
       <div className="about-grid">
         {/* --- LEFT COLUMN: IDENTITY CARD --- */}
-        <div className="profile-card">
+        <section className="profile-card">
           <PanelCorners />
 
           <div className="profile-img-wrapper">
             <div
               className="profile-image"
               style={{ backgroundImage: `url('${identityData.image}')` }}
+              role="img"
+              aria-label="Lead System Architect Profile Image"
             ></div>
-            <div className="profile-id">
+            <div className="profile-id" aria-hidden="true">
               ID: {identityData.id}
             </div>
           </div>
 
-          <h2 className="profile-name">
-            {identityData.name}
-          </h2>
-          <p className="profile-role">
-            {identityData.role}
-          </p>
+          <header>
+            <h2 className="profile-name">
+              {identityData.name}
+            </h2>
+            <p className="profile-role">
+              {identityData.role}
+            </p>
+          </header>
 
           <div className="profile-specs">
             {identityData.specs.map((spec, index) => (
@@ -164,7 +172,7 @@ export default function About() {
             ))}
           </div>
 
-          <div className="profile-links">
+          <nav aria-label="Profile Links" className="profile-links">
             {identityData.links.map((link, index) => (
               <a
                 key={index}
@@ -176,58 +184,64 @@ export default function About() {
                 {link.label}
               </a>
             ))}
-          </div>
-        </div>
+          </nav>
+        </section>
 
         {/* --- RIGHT COLUMN: DATABASE RECORDS --- */}
         <div className="info-panel">
           {/* CORE DIRECTIVE */}
-          <div className="info-section">
+          <section className="info-section">
             <PanelCorners />
-            <h3 className="section-title">CORE_DIRECTIVE</h3>
+            <header>
+              <h3 className="section-title">CORE_DIRECTIVE</h3>
+            </header>
             <p className="body-copy">
               {coreDirective}
             </p>
-          </div>
+          </section>
 
           {/* SKILL MATRIX */}
-          <div className="info-section">
+          <section className="info-section">
             <PanelCorners />
-            <h3 className="section-title">SKILL_MATRIX</h3>
+            <header>
+              <h3 className="section-title">SKILL_MATRIX</h3>
+            </header>
 
             {skillMatrix.map((matrix, index) => (
-              <div key={index}>
-                <p
-                  className="skill-category"
-                >
+              <div key={index} className="mb-4">
+                <h4 className="skill-category">
                   {matrix.category}
-                </p>
-                <div className="skill-grid">
+                </h4>
+                <ul className="skill-grid list-none p-0">
                   {matrix.skills.map((skill, sIndex) => (
-                    <span key={sIndex} className="skill-tag">
+                    <li key={sIndex} className="skill-tag">
                       {skill}
-                    </span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             ))}
-          </div>
+          </section>
 
           {/* ACHIEVEMENTS & AWARDS */}
-          <div className="info-section">
+          <section className="info-section">
             <PanelCorners />
-            <h3 className="section-title">RECORDS_&_AWARDS</h3>
+            <header>
+              <h3 className="section-title">RECORDS_&_AWARDS</h3>
+            </header>
 
             <Timeline items={recordsAndAwards} />
-          </div>
+          </section>
 
           {/* PROFESSIONAL DEPLOYMENTS */}
-          <div className="info-section">
+          <section className="info-section">
             <PanelCorners />
-            <h3 className="section-title">PROFESSIONAL_DEPLOYMENTS</h3>
+            <header>
+              <h3 className="section-title">PROFESSIONAL_DEPLOYMENTS</h3>
+            </header>
 
             <Timeline items={professionalDeployments} />
-          </div>
+          </section>
         </div>
       </div>
     </PageLayout>

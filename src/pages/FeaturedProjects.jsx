@@ -28,7 +28,7 @@ function ExpandedProject({ project, onClose }) {
   const [imgIndex, setImgIndex] = useState(0);
   const touchStartX = useRef(null);
   
-  // NEW: Fullscreen state
+  // Fullscreen state
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   // Carousel Logic
@@ -58,28 +58,30 @@ function ExpandedProject({ project, onClose }) {
   };
 
   return (
-    <div className="expanded-card">
+    <article className="expanded-card">
       <PanelCorners />
 
       {/* Back Button */}
       <button onClick={onClose} className="back-btn">
         &lt; CLOSE_FILE
-        <span className="back-button-cursor">_</span>
+        <span className="back-button-cursor" aria-hidden="true">_</span>
       </button>
 
       {/* CSS GRID CONTAINER */}
       <div className="expanded-grid">
         
         {/* === BOX 1: TITLE & FILE DATA === */}
-        <div className="expanded-box">
-          <h2 className="expanded-title">
-            {project.title}
-          </h2>
+        <section className="expanded-box">
+          <header>
+            <h2 className="expanded-title">
+              {project.title}
+            </h2>
+          </header>
 
           <div className="project-meta project-meta--expanded">
             <ProjectMeta project={project} includeId />
           </div>
-        </div>
+        </section>
 
         {/* === BOX 2: IMAGE CAROUSEL === */}
         <div
@@ -89,7 +91,7 @@ function ExpandedProject({ project, onClose }) {
           onTouchCancel={() => { touchStartX.current = null; }}
         >
           
-          {/* NEW: Expand Button */}
+          {/* Expand Button */}
           <button 
             onClick={() => setIsFullscreen(true)} 
             className="expand-btn"
@@ -100,32 +102,31 @@ function ExpandedProject({ project, onClose }) {
 
           {project.images.length > 1 && (
             <>
-              <button onClick={prevImage} className="carousel-btn carousel-btn-left">&lt;</button>
-              <button onClick={nextImage} className="carousel-btn carousel-btn-right">&gt;</button>
+              <button onClick={prevImage} className="carousel-btn carousel-btn-left" aria-label="Previous Image">&lt;</button>
+              <button onClick={nextImage} className="carousel-btn carousel-btn-right" aria-label="Next Image">&gt;</button>
             </>
           )}
 
           <img
             src={project.images[imgIndex]}
-            alt={project.title}
-            // Added onDoubleClick and cursor-zoom-in pointer
+            alt={`${project.title} screenshot ${imgIndex + 1}`}
             onDoubleClick={() => setIsFullscreen(true)}
             className="carousel-image"
           />
 
           {/* Image Counter HUD */}
-          <div className="image-counter">
+          <div className="image-counter" aria-hidden="true">
             IMG: 0{imgIndex + 1} / 0{project.images.length}
           </div>
         </div>
 
         {/* === BOX 3: DESCRIPTION & LINKS === */}
-        <div className="expanded-box expanded-box--wide">
+        <section className="expanded-box expanded-box--wide">
           <p className="expanded-description">
             {project.description}
           </p>
 
-          <div className="expanded-links">
+          <footer className="expanded-links">
             {project.live_link && (
               <a href={project.live_link} target="_blank" rel="noreferrer" className="link-button">
                 &gt; INITIALIZE_LIVE_PREVIEW_
@@ -136,12 +137,12 @@ function ExpandedProject({ project, onClose }) {
                 &gt; ACCESS_SOURCE_CODE_
               </a>
             )}
-          </div>
-        </div>
+          </footer>
+        </section>
 
       </div>
 
-      {/* === FULLSCREEN MODAL (NOW USING A PORTAL) === */}
+      {/* === FULLSCREEN MODAL (USING A PORTAL) === */}
       {isFullscreen && createPortal(
         <div 
           className="fullscreen-overlay" 
@@ -154,6 +155,7 @@ function ExpandedProject({ project, onClose }) {
           <button
             className="fullscreen-close"
             onClick={() => setIsFullscreen(false)}
+            aria-label="Close Fullscreen"
           >
             X
           </button>
@@ -164,12 +166,14 @@ function ExpandedProject({ project, onClose }) {
               <button 
                 onClick={(e) => { e.stopPropagation(); prevImage(); }} 
                 className="carousel-btn carousel-btn-left carousel-btn--fullscreen"
+                aria-label="Previous Image"
               >
                 &lt;
               </button>
               <button 
                 onClick={(e) => { e.stopPropagation(); nextImage(); }} 
                 className="carousel-btn carousel-btn-right carousel-btn--fullscreen"
+                aria-label="Next Image"
               >
                 &gt;
               </button>
@@ -178,18 +182,18 @@ function ExpandedProject({ project, onClose }) {
 
           <img
             src={project.images[imgIndex]}
-            alt={project.title}
+            alt={`${project.title} fullscreen screenshot ${imgIndex + 1}`}
             onClick={(e) => e.stopPropagation()}
             className="fullscreen-img"
           />
 
-          <div className="image-counter image-counter--fullscreen">
+          <div className="image-counter image-counter--fullscreen" aria-hidden="true">
             IMG: 0{imgIndex + 1} / 0{project.images.length}
           </div>
         </div>,
-        document.body // <-- THIS TELLS REACT TO RENDER OVER EVERYTHING
+        document.body
       )}
-    </div>
+    </article>
   );
 }
 
@@ -197,19 +201,16 @@ function ExpandedProject({ project, onClose }) {
 export default function FeaturedProjects() {
   const [selectedProject, setSelectedProject] = useState(null);
   
-  // NEW: Search States & Refs
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef(null);
 
-  // NEW: Focus the input automatically when the search bar appears
   useEffect(() => {
     if (isSearchActive && searchInputRef.current) {
       searchInputRef.current.focus();
     }
   }, [isSearchActive]);
 
-  // NEW: Filter the data based on the query
   const filteredProjects = projectsData.filter((project) => 
     project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -217,7 +218,6 @@ export default function FeaturedProjects() {
     project.date.toLowerCase().includes(searchQuery.toLowerCase()) 
   );
 
-  // NEW: The Dynamic Button/Search Component
   const dbButton = isSearchActive ? (
     <div className="search-wrapper">
       <input
@@ -226,13 +226,13 @@ export default function FeaturedProjects() {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         onBlur={() => {
-          // If the user clicks away and the box is empty, turn it back into a button
           if (searchQuery.trim() === "") {
             setIsSearchActive(false);
           }
         }}
         placeholder="> ENTER_QUERY_"
         className="search-input"
+        aria-label="Search Projects Database"
       />
     </div>
   ) : (
@@ -242,7 +242,7 @@ export default function FeaturedProjects() {
         setIsSearchActive(true);
       }}
     >
-      &gt; Query_Database<span className="command-cursor">_</span>
+      &gt; Query_Database<span className="command-cursor" aria-hidden="true">_</span>
     </CommandButton>
   );
 
@@ -257,7 +257,6 @@ export default function FeaturedProjects() {
       {/* Hide the grid if a project is selected */}
       <div className={`projects-grid${selectedProject ? " projects-grid--hidden" : ""}`}>
         
-        {/* Render the FILTERED projects instead of all of them */}
         {filteredProjects.map((project) => (
           <article key={project.id} className="project-card">
             <PanelCorners />
@@ -266,6 +265,8 @@ export default function FeaturedProjects() {
               <div
                 className="project-img"
                 style={{ backgroundImage: `url('${project.images[0]}')` }}
+                role="img"
+                aria-label={project.title}
               ></div>
             </div>
 
@@ -297,7 +298,7 @@ export default function FeaturedProjects() {
         )}
       </div>
 
-      {/* EXPANDED VIEW: Renders seamlessly over the hidden grid */}
+      {/* EXPANDED VIEW */}
       {selectedProject && (
         <ExpandedProject
           project={selectedProject}
@@ -306,10 +307,10 @@ export default function FeaturedProjects() {
       )}
 
       {/* INVISIBLE PRELOADER */}
-      <div className="project-preloader">
+      <div className="project-preloader" aria-hidden="true">
         {projectsData.map((proj) =>
           proj.images.map((imgUrl) => (
-            <img key={imgUrl} src={imgUrl} alt="preload" />
+            <img key={imgUrl} src={imgUrl} alt="" />
           )),
         )}
       </div>

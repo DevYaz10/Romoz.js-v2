@@ -17,11 +17,18 @@
   .wallpaper-corner--bottom-left { @apply bottom-0 left-0 -rotate-90; }
   .wallpaper-corner--top-right { @apply top-0 right-0 rotate-90; }
   .wallpaper-corner--bottom-right { @apply right-0 bottom-0 -rotate-180; }
-  .logo-container { @apply z-10 flex h-14 shrink-0 items-center sm:h-16 xl:col-start-1 xl:row-start-1 xl:h-20; }
+  
+  /* Added structural classes for semantic wrappers */
+  .app-header { @apply z-10 flex mt-4 h-14 shrink-0 items-center sm:h-16 xl:col-start-1 xl:row-start-1 xl:h-20; }
+  .app-main { @apply contents xl:contents; }
+  
+  .logo-container { @apply flex h-full items-center; }
   .logo-image { @apply h-full w-auto object-contain; }
   .radar-container { @apply z-10 hidden h-32 shrink-0 justify-end xl:col-start-2 xl:row-start-1 xl:flex; }
   .radar-video { @apply h-full rounded-full opacity-80 mix-blend-screen; }
+  
   .menu-container { @apply z-10 flex w-full max-w-lg shrink-0 flex-col pt-5 pb-12 xl:col-start-1 xl:row-start-3 xl:self-start xl:pb-0; }
+  .menu-container ul { @apply flex flex-col w-full; }
   .menu-item { @apply relative flex h-full w-full flex-col; }
   .menu-hover-box { @apply p-3 pl-10; }
   .menu-item:hover .menu-hover-box { @apply border border-[#109A00] bg-[#0A2E06]; }

@@ -53,7 +53,7 @@ export default function Contacts() {
       description="Establish a direct connection with the system architect. Awaiting transmission data."
       action={
         <CommandButton to="/services">
-          &gt; Initialize_Services<span className="command-cursor">_</span>
+          &gt; Initialize_Services<span className="command-cursor" aria-hidden="true">_</span>
         </CommandButton>
       }
       contentClassName="contact-container"
@@ -61,26 +61,22 @@ export default function Contacts() {
       <div className="contact-grid">
         
         {/* --- LEFT COLUMN: SECURE MESSAGE FORM --- */}
-        <div className="contact-panel">
+        <section className="contact-panel">
           <PanelCorners />
           
-          <h2 className="section-title">
-            COMMS_TERMINAL
-          </h2>
+          <header>
+            <h2 className="section-title">
+              COMMS_TERMINAL
+            </h2>
+          </header>
 
-          {/* 
-            FORM ACTION TRICK: 
-            By pointing this to formsubmit.co, it will automatically email the form contents 
-            directly to your gmail address without needing a backend!
-            (You will need to click an activation link in your email the very first time you test it).
-          */}
           <form action="https://formsubmit.co/webdevyaz10@gmail.com" method="POST" className="contact-form">
             
             {/* Honeypot to prevent spam bots */}
             <input type="text" name="_honey" className="form-honeypot" />
             {/* Disable Captcha for a smoother sci-fi feel */}
             <input type="hidden" name="_captcha" value="false" />
-            {/* Success redirect page (Optional: replace with a custom thank you page URL later) */}
+            {/* Success redirect page */}
             <input type="hidden" name="_next" value={window.location.href} />
 
             {/* Dynamically map the standard inputs */}
@@ -114,17 +110,19 @@ export default function Contacts() {
               &gt; TRANSMIT_PAYLOAD_
             </CommandButton>
           </form>
-        </div>
+        </section>
 
         {/* --- RIGHT COLUMN: DIRECTORIES & LINKS --- */}
-        <div className="contact-panel">
+        <section className="contact-panel">
           <PanelCorners />
 
-          <h2 className="section-title">
-            SYS_DIRECTORY
-          </h2>
+          <header>
+            <h2 className="section-title">
+              SYS_DIRECTORY
+            </h2>
+          </header>
 
-          <div className="contact-info-text">
+          <address className="contact-info-text not-italic">
             {contactDetails.map((detail, index) => (
               <p key={index}>
                 <span className="contact-label">
@@ -133,13 +131,13 @@ export default function Contacts() {
                 {detail.value}
               </p>
             ))}
-          </div>
+          </address>
 
           <h3 className="contact-subtitle">
             EXTERNAL_NODES
           </h3>
           
-          <div className="social-grid">
+          <nav aria-label="External Social Nodes" className="social-grid">
             {socialLinks.map((link) => (
               <a 
                 key={link.id} 
@@ -151,9 +149,9 @@ export default function Contacts() {
                 {link.label}
               </a>
             ))}
-          </div>
+          </nav>
           
-        </div>
+        </section>
       </div>
     </PageLayout>
   );

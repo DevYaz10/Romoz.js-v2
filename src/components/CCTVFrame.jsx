@@ -22,7 +22,7 @@ export default function CCTVFrame({ children }) {
       <FrameCorners />
       <div className="cctv-frame">
         <div className="cctv-content">{children}</div>
-        <time className="live-time">{formatTime(time)}</time>
+        <time className="live-time" dateTime={time.toISOString()}>{formatTime(time)}</time>
       </div>
     </div>
   );
