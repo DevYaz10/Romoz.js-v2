@@ -1,5 +1,37 @@
 [
   {
+    "id": "mersal",
+    "title": "MERSAL",
+    "status": "PUBLISHED",
+    "client": "Romoz",
+    "date": "2026.10",
+    "images_folder": "/Projects Images/Mersal/",
+    "images": [
+      "Home.png",
+      "Discover.png",
+      "Experience.png"
+    ],
+    "description": "An Arabic-first discovery platform for experiences, events and places in Jeddah. Built right-to-left from the typography up, with real accounts, saved lists, and a dashboard that adds cities and categories without a rebuild.",
+    "live_link": "https://mersal.romoz.dev",
+    "repo_link": ""
+  },
+  {
+    "id": "hur",
+    "title": "HUR",
+    "status": "PUBLISHED",
+    "client": "Noura Almelahi Prize",
+    "date": "2026.10",
+    "images_folder": "/Projects Images/Hur/",
+    "images": [
+      "Library.png",
+      "Watch.png",
+      "Settings.png"
+    ],
+    "description": "A calm Arabic video platform for children, organised by age band so every video belongs to exactly one category. Saved videos, review-scored content, and a distraction-free player designed to be handed to a child.",
+    "live_link": "https://hur.romoz.dev",
+    "repo_link": ""
+  },
+  {
     "id": "JobUnder",
     "title": "JOBUNDER",
     "status": "UNPUBLISHED",
