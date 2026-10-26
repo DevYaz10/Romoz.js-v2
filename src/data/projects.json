@@ -42,9 +42,10 @@
     "images": [
       "Library.png",
       "Watch.png",
-      "Settings.png"
+      "Settings.png",
+      "Channel.png"
     ],
-    "description": "A calm Arabic video platform for children, organised by age band so every video belongs to exactly one category. Saved videos, review-scored content, and a distraction-free player designed to be handed to a child.",
+    "description": "A calm Arabic video platform for children, where every video belongs to exactly one age band and every episode is scored on four axes before it appears. A parental dashboard sets daily and session limits, a bedtime window and a comprehension gate before the next episode, while the creator studio publishes episodes and their questions from inside the same app. Three palettes, one token layer, no ads and no autoplay anywhere.",
     "live_link": "https://hur.romoz.dev",
     "repo_link": ""
   },
