@@ -1,5 +1,22 @@
 [
   {
+    "id": "idiome",
+    "title": "IDIOME",
+    "status": "PUBLISHED",
+    "client": "Personal Project",
+    "date": "2026.10",
+    "images_folder": "/Projects Images/Idiome/",
+    "images": [
+      "Home.png",
+      "The Book.png",
+      "The Desk.png",
+      "Editing a Word.png"
+    ],
+    "description": "A personal book of English words: 85 terms gathered over a year, read as a page-turn book instead of a list. Every page is a word with the definition that stuck, filed across nine folios, with a dictionary look-up when writing and a passphrase-locked desk for editing. One Fastify process serves the app and its API from a single origin, on SQLite.",
+    "live_link": "https://idiome.romoz.dev",
+    "repo_link": ""
+  },
+  {
     "id": "mersal",
     "title": "MERSAL",
     "status": "PUBLISHED",
