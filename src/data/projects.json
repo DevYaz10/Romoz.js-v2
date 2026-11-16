@@ -104,38 +104,5 @@
     "description": "Polishing, PPF paint protection, thermal tinting and nano-ceramic coating — by certified technicians using genuine materials, with a written warranty up to 5 years.",
     "live_link": "https://extreme-care.vercel.app",
     "repo_link": ""
-  },
-  {
-    "id": "aether-archives",
-    "title": "AETHER ARCHIVES CLOTHING",
-    "status": "ARCHIVED",
-    "client": "Personal Project",
-    "date": "2026.07",
-    "images_folder": "/Projects Images/AEATHER ARCHIVE/",
-    "images": [
-      "Home.png",
-      "Shop.png",
-      "T&C.png",
-      "Checkout.png"
-    ],
-    "description": "Architected a minimalist, brutalist e-commerce interface for a modern techwear brand. The UI/UX system utilizes high-contrast neon accents, stark concrete backgrounds, and sleek grid layouts to deliver a high-tech, secure shopping experience.",
-    "live_link": "",
-    "repo_link": ""
-  },
-  {
-    "id": "law-almizan",
-    "title": "AL-MIZAN LEGAL FIRM",
-    "status": "ARCHIVED",
-    "client": "Personal Project",
-    "date": "2026.07",
-    "images_folder": "/Projects Images/Al-Mizan/",
-    "images": [
-      "Home.jpeg",
-      "Services.jpeg",
-      "Contacts.jpeg"
-    ],
-    "description": "Architected a confident and authoritative web presence for a Saudi legal firm. The UI/UX system utilizes a deep green and gold color palette alongside structured grid layouts to project trust, professional excellence, and inclusive representation.",
-    "live_link": "",
-    "repo_link": ""
   }
 ]

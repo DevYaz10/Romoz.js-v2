@@ -13,7 +13,10 @@ export default function Home() {
       description="Architecting secure digital infrastructure and high-performance web interfaces. Awaiting command parameters."
       action={
         <CommandButton to="/services">
-          &gt; Initialize_Services<span className="command-cursor" aria-hidden="true">_</span>
+          {"> "}Initialize_Services
+          <span className="command-cursor" aria-hidden="true">
+            _
+          </span>
         </CommandButton>
       }
       contentClassName="cctv-container"
@@ -29,6 +32,8 @@ export default function Home() {
             autoPlay
             loop
             muted
+            playsInline
+            preload="auto"
             className="cctv-video"
             aria-label="Live CCTV feed representation of Jeddah location"
           />

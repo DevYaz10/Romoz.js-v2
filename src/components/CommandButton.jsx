@@ -10,6 +10,7 @@ export default function CommandButton({ children, to, className = "", ...props }
       {...props}
       className={`command-button ${className}`.trim()}
     >
+      <span className="btn-shine" aria-hidden="true" />
       {children}
     </Component>
   );

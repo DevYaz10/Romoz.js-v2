@@ -1,0 +1,153 @@
+/* ==========================================
+   MOTION LIBRARY — keyframes + motion utils
+   ========================================== */
+
+@keyframes hud-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hud-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hud-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* scanline beam that travels down a panel */
+@keyframes hud-scan {
+  0% {
+    transform: translate3d(0, -120%, 0);
+    opacity: 0;
+  }
+  12%,
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 620%, 0);
+    opacity: 0;
+  }
+}
+
+/* specular sweep across a button */
+@keyframes hud-shine {
+  from {
+    transform: translate3d(-130%, 0, 0) skewX(-18deg);
+  }
+  to {
+    transform: translate3d(330%, 0, 0) skewX(-18deg);
+  }
+}
+
+@keyframes hud-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes hud-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hud-ping {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.9;
+  }
+  70%,
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes hud-glow-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px rgb(51 224 79 / 22%), 0 0 28px -18px rgb(51 224 79 / 60%);
+  }
+  50% {
+    box-shadow: 0 0 0 1px rgb(51 224 79 / 38%), 0 0 46px -14px rgb(51 224 79 / 70%);
+  }
+}
+
+@keyframes hud-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 60px 60px;
+  }
+}
+
+@keyframes hud-sweep-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Motion helpers ------------------------------------------------------- */
+
+@utility anim-rise {
+  animation: hud-rise 0.62s var(--ease-hud) backwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@utility anim-fade {
+  animation: hud-fade 0.6s var(--ease-hud) backwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@utility anim-scale-in {
+  animation: hud-scale-in 0.42s var(--ease-hud) backwards;
+  animation-delay: var(--delay, 0ms);
+}
+
+@utility anim-blink {
+  animation: hud-blink 1.15s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

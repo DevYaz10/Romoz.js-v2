@@ -1,11 +1,6 @@
 import PageLayout from "../PageLayout";
 import CFI from "../assets/images/Confidentail Face Id.webp";
 import CommandButton from "../components/CommandButton";
-import { PanelCorners } from "../components/CornerMarks";
-
-// ==========================================
-// DATA DIRECTORY
-// ==========================================
 
 const identityData = {
   id: "Y.TAIFI",
@@ -30,14 +25,7 @@ const coreDirective =
 const skillMatrix = [
   {
     category: "FRONT_END & UI/UX",
-    skills: [
-      "REACT.JS",
-      "VITE",
-      "TAILWIND CSS",
-      "GSAP",
-      "FIGMA",
-      "AFFINITY DESIGNER",
-    ],
+    skills: ["REACT.JS", "VITE", "TAILWIND CSS", "GSAP", "FIGMA", "AFFINITY DESIGNER"],
   },
   {
     category: "BACK_END & INFRASTRUCTURE",
@@ -120,9 +108,14 @@ function Timeline({ items }) {
   );
 }
 
-// ==========================================
-// MAIN COMPONENT
-// ==========================================
+function InfoSection({ title, children, delay }) {
+  return (
+    <section className="info-section panel anim-rise" style={{ "--delay": delay }}>
+      <h3 className="section-title">{title}</h3>
+      {children}
+    </section>
+  );
+}
 
 export default function About() {
   return (
@@ -132,50 +125,48 @@ export default function About() {
       description="Accessing classified credentials for the lead architect and founder of ROMOZ.JS."
       action={
         <CommandButton to="/services">
-          &gt; INITIATE_CONTACT<span className="command-cursor" aria-hidden="true">_</span>
+          {"> "}INITIATE_CONTACT
+          <span className="command-cursor" aria-hidden="true">
+            _
+          </span>
         </CommandButton>
       }
-      contentClassName="about-container"
     >
       <div className="about-grid">
-        {/* --- LEFT COLUMN: IDENTITY CARD --- */}
-        <section className="profile-card">
-          <PanelCorners />
-
+        <section
+          className="profile-card panel panel--glass anim-rise"
+          style={{ "--delay": "120ms" }}
+        >
           <div className="profile-img-wrapper">
             <div
               className="profile-image"
               style={{ backgroundImage: `url('${identityData.image}')` }}
               role="img"
               aria-label="Lead System Architect Profile Image"
-            ></div>
+            />
             <div className="profile-id" aria-hidden="true">
               ID: {identityData.id}
             </div>
           </div>
 
           <header>
-            <h2 className="profile-name">
-              {identityData.name}
-            </h2>
-            <p className="profile-role">
-              {identityData.role}
-            </p>
+            <h2 className="profile-name">{identityData.name}</h2>
+            <p className="profile-role">{identityData.role}</p>
           </header>
 
           <div className="profile-specs">
-            {identityData.specs.map((spec, index) => (
-              <p key={index}>
-                <span className="accent-label">{spec.label}:</span>{" "}
-                {spec.value}
+            {identityData.specs.map((spec) => (
+              <p key={spec.label} className="stat-row">
+                <span className="accent-label">{spec.label}:</span>
+                <span>{spec.value}</span>
               </p>
             ))}
           </div>
 
           <nav aria-label="Profile Links" className="profile-links">
-            {identityData.links.map((link, index) => (
+            {identityData.links.map((link) => (
               <a
-                key={index}
+                key={link.url}
                 href={link.url}
                 target={link.url.startsWith("http") ? "_blank" : "_self"}
                 rel="noreferrer"
@@ -187,61 +178,33 @@ export default function About() {
           </nav>
         </section>
 
-        {/* --- RIGHT COLUMN: DATABASE RECORDS --- */}
         <div className="info-panel">
-          {/* CORE DIRECTIVE */}
-          <section className="info-section">
-            <PanelCorners />
-            <header>
-              <h3 className="section-title">CORE_DIRECTIVE</h3>
-            </header>
-            <p className="body-copy">
-              {coreDirective}
-            </p>
-          </section>
+          <InfoSection title="CORE_DIRECTIVE" delay="170ms">
+            <p className="body-copy">{coreDirective}</p>
+          </InfoSection>
 
-          {/* SKILL MATRIX */}
-          <section className="info-section">
-            <PanelCorners />
-            <header>
-              <h3 className="section-title">SKILL_MATRIX</h3>
-            </header>
-
-            {skillMatrix.map((matrix, index) => (
-              <div key={index} className="mb-4">
-                <h4 className="skill-category">
-                  {matrix.category}
-                </h4>
+          <InfoSection title="SKILL_MATRIX" delay="230ms">
+            {skillMatrix.map((matrix) => (
+              <div key={matrix.category} className="mb-3 last:mb-0">
+                <h4 className="skill-category">{matrix.category}</h4>
                 <ul className="skill-grid list-none p-0">
-                  {matrix.skills.map((skill, sIndex) => (
-                    <li key={sIndex} className="skill-tag">
+                  {matrix.skills.map((skill) => (
+                    <li key={skill} className="skill-tag">
                       {skill}
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
-          </section>
+          </InfoSection>
 
-          {/* ACHIEVEMENTS & AWARDS */}
-          <section className="info-section">
-            <PanelCorners />
-            <header>
-              <h3 className="section-title">RECORDS_&_AWARDS</h3>
-            </header>
-
+          <InfoSection title="RECORDS_&_AWARDS" delay="290ms">
             <Timeline items={recordsAndAwards} />
-          </section>
+          </InfoSection>
 
-          {/* PROFESSIONAL DEPLOYMENTS */}
-          <section className="info-section">
-            <PanelCorners />
-            <header>
-              <h3 className="section-title">PROFESSIONAL_DEPLOYMENTS</h3>
-            </header>
-
+          <InfoSection title="PROFESSIONAL_DEPLOYMENTS" delay="350ms">
             <Timeline items={professionalDeployments} />
-          </section>
+          </InfoSection>
         </div>
       </div>
     </PageLayout>

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Outlet, Link } from "react-router";
-import MenuItem from "./components/MenuItem";
+import { Link, Outlet } from "react-router";
+import NavItem from "./components/NavItem";
 import logoIcon from "./assets/images/Logo.png";
 import logoText from "./assets/images/Title4.webp";
 import WCorner from "./assets/images/Wallpaper Corner.svg";
@@ -22,22 +22,27 @@ const menuItems = [
   { text: "Services", to: "/services", video: flagVideo },
 ];
 
-function App() {
+export default function App() {
   const [activeVideo, setActiveVideo] = useState(fountainVideo);
 
   return (
     <div className="app-wrapper">
+      {/* atmospheric layers */}
+      <div className="hud-layer hud-layer--vignette" aria-hidden="true" />
+      <div className="hud-layer hud-layer--grid" aria-hidden="true" />
+      <div className="hud-layer hud-layer--scanlines" aria-hidden="true" />
+
       {wallpaperCorners.map((position) => (
         <img
           key={position}
           src={WCorner}
           alt=""
           aria-hidden="true"
+          draggable="false"
           className={`wallpaper-corner wallpaper-corner--${position}`}
         />
       ))}
 
-      {/* 1. Logo */}
       <header className="app-header">
         <Link to="/" className="logo-container" aria-label="Romoz.JS Home">
           <img src={logoIcon} alt="Romoz.JS Logo Icon" className="logo-image" />
@@ -45,31 +50,30 @@ function App() {
         </Link>
       </header>
 
-      {/* 2. Radar */}
       <div className="radar-container" aria-hidden="true">
-        <video src={radarVideo} autoPlay loop muted className="radar-video" />
+        <div className="radar-shell">
+          <video src={radarVideo} autoPlay loop muted playsInline className="radar-video" />
+        </div>
       </div>
 
-      {/* 3. THE OUTLET */}
-      <main className="app-main">
-        <Outlet context={{ activeVideo }} />
-      </main>
-
-      {/* 4. Semantic Navigation Bar */}
-      <nav className="menu-container" aria-label="Main Navigation">
-        <ul>
-          {menuItems.map((item) => (
-            <MenuItem
-              key={item.to}
-              text={item.text}
-              to={item.to}
-              onMouseEnter={() => setActiveVideo(item.video)}
-            />
-          ))}
-        </ul>
+      <nav
+        className="menu-container no-scrollbar anim-fade"
+        aria-label="Main Navigation"
+        style={{ "--delay": "60ms" }}
+      >
+        {menuItems.map((item) => (
+          <NavItem
+            key={item.to}
+            text={item.text}
+            to={item.to}
+            onHover={() => setActiveVideo(item.video)}
+          />
+        ))}
       </nav>
+
+      <div className="app-main">
+        <Outlet context={{ activeVideo }} />
+      </div>
     </div>
   );
 }
-
-export default App;

@@ -4,19 +4,28 @@ export default function PageLayout({
   description,
   action,
   children,
-  contentClassName,
+  contentClassName = "scroll-panel",
 }) {
   return (
     <>
       <header className="cta-container">
-        <h1 className="cta-heading">
+        <h1 className="cta-heading anim-rise">
           {title} <span className="cta-heading-accent">{accent}</span>
         </h1>
-        <p className="cta-text">{description}</p>
-        {action}
+        <div className="cta-rule anim-fade" style={{ "--delay": "120ms" }} aria-hidden="true" />
+        <p className="cta-text anim-rise" style={{ "--delay": "170ms" }}>
+          {description}
+        </p>
+        {action && (
+          <div className="anim-rise flex" style={{ "--delay": "260ms" }}>
+            {action}
+          </div>
+        )}
       </header>
 
-      <main className={contentClassName}>{children}</main>
+      <main className={`${contentClassName} anim-rise`} style={{ "--delay": "200ms" }}>
+        {children}
+      </main>
     </>
   );
 }

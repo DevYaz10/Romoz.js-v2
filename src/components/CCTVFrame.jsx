@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FrameCorners } from "./CornerMarks";
 
 const formatTime = (date) =>
@@ -7,22 +7,31 @@ const formatTime = (date) =>
     .join(":");
 
 export default function CCTVFrame({ children }) {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(() => new Date());
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 1000);
+    const tick = () => setTime(new Date());
+    const interval = setInterval(tick, 1000);
+    document.addEventListener("visibilitychange", tick);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", tick);
+    };
   }, []);
 
   return (
     <div className="cctv-frame-wrapper">
       <FrameCorners />
       <div className="cctv-frame">
-        <div className="cctv-content">{children}</div>
-        <time className="live-time" dateTime={time.toISOString()}>{formatTime(time)}</time>
+        <div className="cctv-content">
+          {children}
+          <span className="cctv-sweep" aria-hidden="true" />
+        </div>
+        <time className="live-time" dateTime={time.toISOString()}>
+          <span className="live-dot" aria-hidden="true" />
+          {formatTime(time)}
+        </time>
       </div>
     </div>
   );
