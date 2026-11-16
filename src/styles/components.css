@@ -55,7 +55,7 @@
   .wallpaper-corner--top-right { @apply top-0 right-0 rotate-90; }
   .wallpaper-corner--bottom-right { @apply right-0 bottom-0 -rotate-180; }
 
-  .app-header { @apply z-20 flex h-12 shrink-0 items-center sm:h-16 xl:col-start-1 xl:row-start-1 xl:h-[5.5rem]; }
+  .app-header { @apply z-20 mt-2.5 flex h-12 shrink-0 items-center sm:h-16 xl:col-start-1 xl:row-start-1 xl:h-[5.5rem]; }
   .app-main { @apply contents; }
 
   .logo-container { @apply flex h-full items-center gap-1; }
@@ -71,7 +71,7 @@
   }
 
   .radar-container {
-    @apply z-20 hidden h-36 shrink-0 items-center justify-end xl:col-start-2 xl:row-start-1 xl:flex;
+    @apply z-20 mt-2.5 hidden h-36 shrink-0 items-center justify-end xl:col-start-2 xl:row-start-1 xl:flex;
   }
 
   .radar-shell { @apply relative flex h-full aspect-square items-center justify-center; }
@@ -772,11 +772,12 @@
     .command-button { margin-top: 0.65rem; padding-top: 0.4rem; padding-bottom: 0.4rem; font-size: 0.72rem; }
     .menu-box { padding-top: 0.3rem; padding-bottom: 0.3rem; }
     .menu-text { font-size: 0.92rem; }
-    .form-group { margin-bottom: 0.3rem; gap: 0.1rem; }
-    .form-input { padding: 0.2rem 0.45rem; font-size: 0.95rem; }
-    .form-textarea { min-height: 2.8rem; }
+    .form-group { margin-bottom: 0.15rem; gap: 0.1rem; }
+    .section-title { margin-bottom: 0.4rem; padding-bottom: 0.25rem; }
+    .form-input { padding: 0.15rem 0.45rem; font-size: 0.95rem; }
+    .form-textarea { min-height: 2.4rem; }
     .form-label { font-size: 9px; }
-    .contact-panel { padding: 0.6rem 0.85rem; }
+    .contact-panel { padding: 0.5rem 0.8rem; }
     .contact-info-text { font-size: 0.95rem; }
   }
 
